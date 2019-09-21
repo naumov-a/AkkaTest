@@ -16,8 +16,8 @@ class Database(implicit val system: ActorSystem,
     val uri = Uri.from(scheme = "http", host = "localhost", port = 8000, path = s"/score/$word")
 
     Http().singleRequest(HttpRequest(uri = uri)).flatMap { result =>
-      Unmarshal(result.entity).to[String]
-    }.map( str => str.toInt )
+      Unmarshal(result.entity).to[String].map( str => str.toInt )
+    }
   }
 
 }
